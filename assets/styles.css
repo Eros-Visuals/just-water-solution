@@ -207,6 +207,7 @@ svg.i { width: 20px; height: 20px; flex: none; }
 .step.is-active .step-num { background: var(--teal); color: var(--white); }
 .step h3 { font-size: 1.04rem; font-weight: 700; margin-top: 5px; }
 .step p { color: var(--muted); font-size: .94rem; margin-top: 3px; }
+.opt { display: inline-block; vertical-align: 2px; margin-left: 6px; padding: 3px 8px; border-radius: 999px; background: var(--sand); color: var(--muted); font: 700 .66rem/1 var(--font); letter-spacing: .1em; text-transform: uppercase; }
 
 /* ---------- Process ---------- */
 .process { background: var(--deep); color: rgba(255,255,255,.75); position: relative; overflow: hidden; }
