@@ -1,6 +1,27 @@
 // Just Water Solution: page behaviour (no dependencies)
 (function () {
   var BUSINESS_EMAIL = 'justwatersolution@yahoo.com';
+  var ES = document.documentElement.lang === 'es';
+  var T = ES ? {
+    openMenu: 'Abrir menú', closeMenu: 'Cerrar menú',
+    missing: 'Por favor escriba su nombre, teléfono y dirección.',
+    opening: 'Abriendo su aplicación de correo...',
+    subject: 'Solicitud de cotización de ', name: 'Nombre', phone: 'Teléfono', email: 'Correo',
+    address: 'Dirección', source: 'Fuente de agua'
+  } : {
+    openMenu: 'Open menu', closeMenu: 'Close menu',
+    missing: 'Please fill in your name, phone and address.',
+    opening: 'Opening your email app...',
+    subject: 'Quote request from ', name: 'Name', phone: 'Phone', email: 'Email',
+    address: 'Address', source: 'Water source'
+  };
+
+  // Language switch: remember the choice so the next visit opens in that language
+  document.querySelectorAll('.lang a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('jws-lang', a.dataset.lang); } catch (e) {}
+    });
+  });
 
   // Header shadow once the page scrolls
   var header = document.querySelector('.header');
@@ -14,7 +35,7 @@
   function setMenu(open) {
     header.classList.toggle('is-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuBtn.setAttribute('aria-label', open ? T.closeMenu : T.openMenu);
     menuIcon.setAttribute('href', open ? '#i-x' : '#i-menu');
   }
   menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
@@ -94,25 +115,25 @@
       return !f.value.trim();
     });
     if (missing.length) {
-      status.textContent = 'Please fill in your name, phone and address.';
+      status.textContent = T.missing;
       missing[0].focus();
       return;
     }
     var d = new FormData(form);
     var name = (d.get('first') + ' ' + d.get('last')).trim();
     var body = [
-      'Name: ' + name,
-      'Phone: ' + d.get('phone'),
-      'Email: ' + (d.get('email') || ''),
-      'Address: ' + d.get('address'),
-      'Water source: ' + d.get('source'),
+      T.name + ': ' + name,
+      T.phone + ': ' + d.get('phone'),
+      T.email + ': ' + (d.get('email') || ''),
+      T.address + ': ' + d.get('address'),
+      T.source + ': ' + d.get('source'),
       '',
       d.get('message') || ''
     ].join('\n');
     var href = 'mailto:' + BUSINESS_EMAIL +
-      '?subject=' + encodeURIComponent('Quote request from ' + name) +
+      '?subject=' + encodeURIComponent(T.subject + name) +
       '&body=' + encodeURIComponent(body);
-    status.textContent = 'Opening your email app...';
+    status.textContent = T.opening;
     window.location.href = href;
   });
 

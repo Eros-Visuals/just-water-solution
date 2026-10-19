@@ -103,7 +103,7 @@ svg.i { width: 20px; height: 20px; flex: none; }
 .logo-text b { font: 800 1.22rem/1 var(--font); color: var(--ink); letter-spacing: -0.03em; }
 .logo-text small { font: 700 .62rem/1 var(--font); letter-spacing: .34em; color: var(--teal); margin-top: 6px; }
 .nav { display: flex; gap: 30px; margin-left: auto; }
-.nav a { font-weight: 600; font-size: .95rem; color: var(--ink); padding: 8px 0; transition: color .2s; }
+.nav a { font-weight: 600; font-size: .95rem; color: var(--ink); padding: 8px 0; white-space: nowrap; transition: color .2s; }
 .nav a:hover { color: var(--teal); }
 .menu-btn {
   display: none; margin-left: auto; width: 46px; height: 46px; border-radius: 12px;
@@ -111,6 +111,11 @@ svg.i { width: 20px; height: 20px; flex: none; }
   align-items: center; justify-content: center;
 }
 .menu-btn svg { width: 22px; height: 22px; }
+.lang { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); flex: none; }
+.lang a { font: 700 .76rem/1 var(--font); letter-spacing: .08em; padding: 8px 11px; border-radius: 999px; color: var(--muted); transition: color .2s, background .2s; }
+.lang a:hover { color: var(--teal); }
+.lang a.is-active { background: var(--teal); color: var(--white); }
+.lang + .header-cta { margin-left: -18px; }
 .mobile-nav { display: none; border-top: 1px solid var(--line); padding: 8px 28px 24px; background: var(--white); }
 .mobile-nav a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 600; color: var(--ink); }
 .mobile-nav .btn { display: flex; margin-top: 18px; border-bottom: 0; color: var(--white); }
@@ -360,9 +365,16 @@ svg.i { width: 20px; height: 20px; flex: none; }
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .nav { gap: 22px; }
-  .header .btn--sm .lbl-long { display: none; }
+}
+
+@media (max-width: 1080px) {
+  /* the header folds into the menu button here: Spanish labels need about 1,050px next to the EN | ES switch */
+  .nav, .header-cta { display: none; }
+  .menu-btn { display: inline-flex; }
+  .lang { margin-left: auto; }
+  .lang ~ .menu-btn { margin-left: -20px; }
   .feature { gap: 48px; }
   .also { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: repeat(2, 1fr); gap: 44px 32px; }
@@ -372,8 +384,6 @@ svg.i { width: 20px; height: 20px; flex: none; }
 
 @media (max-width: 900px) {
   .section { padding: 80px 0; }
-  .nav, .header-cta { display: none; }
-  .menu-btn { display: inline-flex; }
   .utility .hide-md { display: none; }
   .feature, .how, .about, .contact .container, .symptoms, .faq-wrap { grid-template-columns: 1fr; gap: 44px; }
   .feature:nth-child(even) .feature-media { order: 0; }

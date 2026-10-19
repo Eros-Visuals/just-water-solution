@@ -14,8 +14,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=8">
-  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="assets/styles.css?v=11">
+  <script>document.documentElement.classList.add('js');try{if(localStorage.getItem('jws-lang')==='es')location.replace('es/'+location.hash)}catch(e){}</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -102,6 +102,7 @@
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <div class="lang" role="group" aria-label="Language"><a href="./" class="is-active" aria-current="true" hreflang="en" lang="en" data-lang="en">EN</a><a href="es/" hreflang="es" lang="es" data-lang="es">ES</a></div>
     <div class="header-cta">
       <a class="btn btn--teal btn--sm" href="#contact">Request a quote</a>
     </div>
@@ -535,6 +536,6 @@
   <a class="btn btn--teal" href="#contact">Get a quote</a>
 </div>
 
-<script src="assets/site.js?v=8"></script>
+<script src="assets/site.js?v=10"></script>
 </body>
 </html>
