@@ -1,0 +1,5 @@
+# One address for the site: https and no www (GoDaddy cPanel hosting, justwatersolution.com)
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://justwatersolution.com%{REQUEST_URI} [L,R=301]
