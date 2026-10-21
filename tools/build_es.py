@@ -72,6 +72,11 @@ def main():
     html = ''.join(rebuilt)
 
     html = html.replace('<html lang="en">', '<html lang="es">', 1)
+    # the Spanish page is its own canonical URL; the hreflang alternates stay the same on both pages
+    for tag in ('<meta property="og:url" content="https://justwatersolution.com/">',
+                '<link rel="canonical" href="https://justwatersolution.com/">'):
+        assert tag in html, tag
+        html = html.replace(tag, tag.replace('justwatersolution.com/"', 'justwatersolution.com/es/"'))
     assert EN_SWITCH in html and EN_PREF in html, 'language switch or preference script changed in index.html'
     html = html.replace(EN_SWITCH, ES_SWITCH).replace(EN_PREF, ES_PREF)
     for a in ('src="img/', 'data-full="img/', 'content="img/', 'href="assets/', 'src="assets/', '"image": "img/'):
